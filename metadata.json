@@ -1,0 +1,6 @@
+{
+  "name": "Happy Birthday Agatha",
+  "description": "A wholesome, aesthetic digital scrapbook and interactive birthday gift for Agatha.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
