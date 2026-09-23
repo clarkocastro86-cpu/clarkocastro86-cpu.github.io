@@ -16,19 +16,24 @@ class BirthdayAudioManager {
 
   constructor() {
     if (typeof window !== 'undefined') {
-      // Check if custom mp3 exists (relative for GitHub Pages support)
-      const songPath = resolveAssetUrl('birthday-song.mp3');
-      this.audioEl = new Audio(songPath);
-      this.audioEl.loop = true;
-      this.audioEl.preload = 'metadata';
+      try {
+        // Check if custom mp3 exists (relative for GitHub Pages support)
+        const songPath = resolveAssetUrl('birthday-song.mp3');
+        this.audioEl = new Audio(songPath);
+        this.audioEl.loop = true;
+        this.audioEl.preload = 'none';
 
-      this.audioEl.addEventListener('error', () => {
+        this.audioEl.addEventListener('error', () => {
+          this.hasMp3 = false;
+        });
+
+        this.audioEl.addEventListener('canplaythrough', () => {
+          this.hasMp3 = true;
+        });
+      } catch (err) {
+        this.audioEl = null;
         this.hasMp3 = false;
-      });
-
-      this.audioEl.addEventListener('canplaythrough', () => {
-        this.hasMp3 = true;
-      });
+      }
     }
   }
 

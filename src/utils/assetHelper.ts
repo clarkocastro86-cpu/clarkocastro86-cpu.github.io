@@ -4,7 +4,7 @@
  */
 export function resolveAssetUrl(url: string): string {
   if (!url) return '';
-  
+
   // If data URI or external URL, return directly
   if (
     url.startsWith('data:') ||
@@ -24,7 +24,13 @@ export function resolveAssetUrl(url: string): string {
   }
 
   // Strip any leading ./ or / from path
-  const cleanPath = url.replace(/^\.?\//, '');
+  let cleanPath = url.replace(/^(\.\/|\/)+/, '');
+
+  // If path starts with repository name without leading slash (e.g. gggggggggg/photos/...)
+  const repoName = normalizedBase.replace(/^\/|\/$/g, '');
+  if (repoName && cleanPath.startsWith(`${repoName}/`)) {
+    cleanPath = cleanPath.slice(repoName.length + 1);
+  }
 
   return `${normalizedBase}${cleanPath}`;
 }

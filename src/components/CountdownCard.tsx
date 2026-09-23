@@ -10,8 +10,8 @@ interface CountdownCardProps {
 }
 
 export const CountdownCard: React.FC<CountdownCardProps> = ({ photos, onCelebrateClick }) => {
-  // Target: October 3, 2026 (from user's counter.png)
-  const targetDate = new Date('2026-10-03T00:00:00');
+  // Target: October 3, 2026 (Month is 0-indexed: 9 = October)
+  const targetDate = new Date(2026, 9, 3, 0, 0, 0);
 
   const [timeLeft, setTimeLeft] = useState({
     days: 1,
