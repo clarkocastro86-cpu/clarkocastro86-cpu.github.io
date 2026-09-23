@@ -1,10 +1,11 @@
 import { ScrapbookPhoto, MemoryTimelineItem, FriendshipTrait } from '../types';
+import { resolveAssetUrl } from '../utils/assetHelper';
 
 export const DEFAULT_PHOTOS: ScrapbookPhoto[] = [
   {
     id: 'photo-1',
     // Photo 1: Agatha with glasses, golden lighting, cute aesthetic pout
-    url: './photos/photo-1.jpg',
+    url: resolveAssetUrl('photos/photo-1.jpg'),
     caption: 'pa pogi ka dito pre ah',
     subtitle: 'Golden hour perfection ✨',
     rotation: -3,
@@ -13,7 +14,7 @@ export const DEFAULT_PHOTOS: ScrapbookPhoto[] = [
   {
     id: 'photo-2',
     // Photo 2: Agatha outdoor candid moment with cap & iced drink
-    url: './photos/photo-2.jpg',
+    url: resolveAssetUrl('photos/photo-2.jpg'),
     caption: 'dito pa-cute yan siya',
     subtitle: 'Mid-laugh as usual 📸',
     rotation: 4,
@@ -22,7 +23,7 @@ export const DEFAULT_PHOTOS: ScrapbookPhoto[] = [
   {
     id: 'photo-3',
     // Photo 3: Agatha aesthetic portrait
-    url: './photos/photo-3.jpg',
+    url: resolveAssetUrl('photos/photo-3.jpg'),
     caption: 'One of those little moments worth remembering.',
     subtitle: 'A day we will never forget ☁️',
     rotation: -1,

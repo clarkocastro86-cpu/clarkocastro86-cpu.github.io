@@ -1,6 +1,8 @@
 // Interactive Web Audio API music-box for Agatha's Birthday
 // Provides smooth, immediate mobile and desktop playback with rich kalimba/music-box chime harmonics.
 
+import { resolveAssetUrl } from './assetHelper';
+
 class BirthdayAudioManager {
   private ctx: AudioContext | null = null;
   private isPlaying = false;
@@ -15,8 +17,7 @@ class BirthdayAudioManager {
   constructor() {
     if (typeof window !== 'undefined') {
       // Check if custom mp3 exists (relative for GitHub Pages support)
-      const base = import.meta.env.BASE_URL || './';
-      const songPath = base.endsWith('/') ? `${base}birthday-song.mp3` : `${base}/birthday-song.mp3`;
+      const songPath = resolveAssetUrl('birthday-song.mp3');
       this.audioEl = new Audio(songPath);
       this.audioEl.loop = true;
       this.audioEl.preload = 'metadata';

@@ -4,24 +4,27 @@
  */
 export function resolveAssetUrl(url: string): string {
   if (!url) return '';
-  // If data URI or absolute HTTP(S) URL, leave as is
-  if (url.startsWith('data:') || url.startsWith('http://') || url.startsWith('https://') || url.startsWith('blob:')) {
-    return url;
-  }
-
-  const base = import.meta.env.BASE_URL || './';
   
-  // Strip leading slash if any
-  const cleanPath = url.startsWith('/') ? url.slice(1) : url;
-
-  // If already relative with ./
-  if (url.startsWith('./')) {
+  // If data URI or external URL, return directly
+  if (
+    url.startsWith('data:') ||
+    url.startsWith('http://') ||
+    url.startsWith('https://') ||
+    url.startsWith('blob:')
+  ) {
     return url;
   }
 
-  // Combine with base ensuring no double slashes
-  if (base.endsWith('/')) {
-    return `${base}${cleanPath}`;
+  const base = import.meta.env.BASE_URL || '/';
+  const normalizedBase = base.endsWith('/') ? base : `${base}/`;
+
+  // If URL already includes base, don't duplicate it
+  if (url.startsWith(normalizedBase)) {
+    return url;
   }
-  return `${base}/${cleanPath}`;
+
+  // Strip any leading ./ or / from path
+  const cleanPath = url.replace(/^\.?\//, '');
+
+  return `${normalizedBase}${cleanPath}`;
 }
